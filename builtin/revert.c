@@ -261,7 +261,9 @@ static int run_sequencer(int argc, const char **argv, const char *prefix,
 		free(opts->strategy);
 		opts->strategy = xstrdup_or_null(strategy);
 	}
-	free(options);
+
+	if (options != base_options)
+		free(options);
 
 	if (cmd == 'q') {
 		int ret = sequencer_remove_state(opts);
